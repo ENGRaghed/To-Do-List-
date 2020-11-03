@@ -6,11 +6,11 @@ import java.util.*
 
 @Entity(tableName = "task_table")
 data class Task (
-    @PrimaryKey(autoGenerate = true)
-    val id : Int,
+    @PrimaryKey
+    val id : UUID = UUID.randomUUID(),
     val title : String,
     val creationDate: Date,
-    val dueDate: Date,
-    val status : Boolean,
+    val dueDate: Date?=null,
+    val status : Boolean = false,
     val description : String
 )

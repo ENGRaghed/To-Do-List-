@@ -1,11 +1,10 @@
 package com.bignerdranch.android.todolist.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 
 @Database(entities = [Task::class], version = 1)
+@TypeConverters(TaskTypeConverters::class)
 abstract class TaskDatabase : RoomDatabase(){
 
     abstract fun taskDao() : TaskDao
