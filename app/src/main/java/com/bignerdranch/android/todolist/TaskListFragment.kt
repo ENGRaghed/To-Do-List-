@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +71,10 @@ class TaskListFragment : Fragment() {
             holder.itemView.date_item.text=currentTask.creationDate.toString()
             if (currentTask.status){
                 holder.itemView.complete_item.visibility= View.VISIBLE
+            }
+            holder.itemView.task_item_layout.setOnClickListener {
+                val action = TaskListFragmentDirections.actionTaskListFragmentToUpdateTaskFragment(currentTask)
+                holder.itemView.findNavController().navigate(action)
             }
         }
        fun setTasks(tasks : List<Task>){

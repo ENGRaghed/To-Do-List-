@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".UpdateTaskFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="40dp"/>
+
+    <EditText
+        android:id="@+id/update_title_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textSize="30dp"/>
+
+    <EditText
+        android:id="@+id/update_desc_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="desc"
+        android:textSize="30dp"/>
+
+    <Switch
+        android:id="@+id/update_status"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:text="status" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="30dp" />
+
+
+</LinearLayout>

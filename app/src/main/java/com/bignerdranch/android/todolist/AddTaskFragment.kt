@@ -58,7 +58,7 @@ class AddTaskFragment : Fragment() {
 
     }
 
-    fun inputCheck(title : String , desc : String) : Boolean {
+    private fun inputCheck(title : String , desc : String) : Boolean {
         return !(TextUtils.isEmpty(title)||TextUtils.isEmpty(desc))
     }
 
