@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_taskListFragment_to_updateTaskFragment"
             app:destination="@id/updateTaskFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
@@ -36,6 +39,18 @@
             app:destination="@id/taskListFragment" />
         <argument
             android:name="task"
+            app:argType="com.bignerdranch.android.todolist.data.Task" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailsFragment"
+        android:name="com.bignerdranch.android.todolist.TaskDetailsFragment"
+        android:label="fragment_task_details"
+        tools:layout="@layout/fragment_task_details" >
+        <action
+            android:id="@+id/action_taskDetailsFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <argument
+            android:name="currentTask"
             app:argType="com.bignerdranch.android.todolist.data.Task" />
     </fragment>
 </navigation>

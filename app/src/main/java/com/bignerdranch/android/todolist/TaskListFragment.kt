@@ -17,6 +17,7 @@ import com.bignerdranch.android.todolist.data.Task
 import com.bignerdranch.android.todolist.data.TaskViewModel
 import kotlinx.android.synthetic.main.fragment_task_list.view.*
 import kotlinx.android.synthetic.main.task_item_rv.view.*
+import java.util.*
 
 
 class TaskListFragment : Fragment() {
@@ -61,12 +62,11 @@ class TaskListFragment : Fragment() {
                 //add button
                 buffer.add(
                     MyButton(requireContext(),
-                    "delete",30,0,Color.parseColor("#FF3c30"),
+                    "delete",30,R.drawable.ic_delete_24,Color.parseColor("#FF3c30"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
                                 Toast.makeText(requireContext(), "delete id : $pos",Toast.LENGTH_SHORT).show()
-//                                adapter.itemCount
-//                                adapter.currentTask
+
                                 deleteTask(adapter.taskList[pos])
                             }
                         })
@@ -113,17 +113,24 @@ class TaskListFragment : Fragment() {
         override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
             currentTask= taskList[position]
             holder.itemView.title_item.text=currentTask.title
-            holder.itemView.date_item.text=currentTask.creationDate.toString()
+            if (currentTask.dueDate!=null){
+                if (currentTask.dueDate!!.before(Date())){
+                holder.itemView.date_item.setTextColor(Color.RED)
+                }
+                holder.itemView.date_item.text=currentTask.dueDate.toString()
+            }else{
+                holder.itemView.date_item.text=""
+            }
             if (currentTask.status){
                 holder.itemView.complete_item.visibility= View.VISIBLE
             }else{
                 holder.itemView.complete_item.visibility= View.GONE
 
             }
-//            holder.itemView.task_item_layout.setOnClickListener {
-//                val action = TaskListFragmentDirections.actionTaskListFragmentToUpdateTaskFragment(currentTask)
-//                holder.itemView.findNavController().navigate(action)
-//            }
+            holder.itemView.task_item_layout.setOnClickListener {
+                val action = TaskListFragmentDirections.actionTaskListFragmentToTaskDetailsFragment(taskList[position])
+                holder.itemView.findNavController().navigate(action)
+            }
         }
        fun setTasks(tasks : List<Task>){
            this.taskList=tasks
