@@ -21,6 +21,8 @@ class AddTaskFragment : Fragment(),DatePickerFragment.Callbacks {
 
     private lateinit var taskViewModel : TaskViewModel
 
+    private var dueDate : Date? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,19 +37,13 @@ class AddTaskFragment : Fragment(),DatePickerFragment.Callbacks {
             insertTaskToDatabase()
         }
 
-//        dateButton.setOnClickListener { DatePickerFragment().apply {
-//            show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE) }
-//        }
 
-//        view.task_due_date.setOnClickListener { DatePickerFragment().apply {
-//            show(this@AddTaskFragment.requireParentFragment(), DIALOG_DATE)
-//        }
-//        }
+        view.task_due_date.setOnClickListener { DatePickerFragment.newInstance(Date()).apply {
+            setTargetFragment(this@AddTaskFragment, REQUEST_DATE)
+            show(this@AddTaskFragment.requireFragmentManager(), DIALOG_DATE)
+        } }
 
-//        view.task_due_date.setOnClickListener {  DatePickerFragment().apply {
-//            setTargetFragment(this@AddTaskFragment, REQUEST_DATE)
-//            show(this@AddTaskFragment.requireFragmentManager(), DIALOG_DATE)
-//        } }
+        view.task_due_date.setText("add due date")
 
 
         return view
@@ -57,11 +53,10 @@ class AddTaskFragment : Fragment(),DatePickerFragment.Callbacks {
 
         val title = task_title_et.text.toString()
         val desc = task_desc_et.text.toString()
-
         if (inputCheck(title,desc)) {
 
             //create task object
-            val task: Task = Task(title = title, creationDate = Date(), description = desc)
+            val task: Task = Task(title = title, creationDate = Date(), description = desc,dueDate = dueDate)
 
             //add task
             taskViewModel.addTask(task)
@@ -80,8 +75,12 @@ class AddTaskFragment : Fragment(),DatePickerFragment.Callbacks {
     }
 
     override fun onDateSelected(date: Date) {
-        Task().dueDate=date
+        this.dueDate=date
+        task_due_date.setText(date.toString())
+
 
     }
+
+
 
 }

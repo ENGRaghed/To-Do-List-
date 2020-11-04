@@ -12,13 +12,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bignerdranch.android.todolist.data.Task
 import com.bignerdranch.android.todolist.data.TaskViewModel
+import kotlinx.android.synthetic.main.fragment_add_task.view.*
 import kotlinx.android.synthetic.main.fragment_update_task.*
 import kotlinx.android.synthetic.main.fragment_update_task.view.*
+import java.util.*
 
-
-class UpdateTaskFragment : Fragment() {
+private const val DIALOG_DATE = "DialogDate"
+private const val REQUEST_DATE = 0
+class UpdateTaskFragment : Fragment() ,DatePickerFragment.Callbacks {
 
     private val args by navArgs<UpdateTaskFragmentArgs>()
+
+//    private var dueDate : Date? = args.task.dueDate
+
 
     private lateinit var taskViewModel: TaskViewModel
 
@@ -35,10 +41,21 @@ class UpdateTaskFragment : Fragment() {
         view.update_desc_et.setText(args.task.description)
         view.update_status.isChecked=args.task.status
 
+        if (args.task.dueDate!=null){
+            view.update_dueDate_b.setText(args.task.dueDate.toString())
+
+        }else{
+            view.update_dueDate_b.setText("due date not selected yet")
+        }
+
         view.update_button.setOnClickListener {
             updateTask()
         }
 
+        view.update_dueDate_b.setOnClickListener { DatePickerFragment.newInstance(Date()).apply {
+            setTargetFragment(this@UpdateTaskFragment, REQUEST_DATE)
+            show(this@UpdateTaskFragment.requireFragmentManager(), DIALOG_DATE)
+        } }
         return view
     }
 
@@ -66,6 +83,12 @@ class UpdateTaskFragment : Fragment() {
 
     private fun inputCheck(title : String , desc : String) : Boolean {
         return !(TextUtils.isEmpty(title)|| TextUtils.isEmpty(desc))
+    }
+
+    override fun onDateSelected(date: Date) {
+//        this.dueDate=date
+        args.task.dueDate = date
+        update_dueDate_b.setText(date.toString())
     }
 
 }

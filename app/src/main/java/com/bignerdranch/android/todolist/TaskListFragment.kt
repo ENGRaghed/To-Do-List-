@@ -3,10 +3,8 @@ package com.bignerdranch.android.todolist
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,17 +23,17 @@ class TaskListFragment : Fragment() {
 
     private lateinit var taskViewModel: TaskViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view : View= inflater.inflate(R.layout.fragment_task_list, container, false)
-
-        view.floatingActionButton.setOnClickListener{
-            findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
-        }
-
 
         //recyclerView
         val adapter = TaskListAdapter()
@@ -145,6 +143,19 @@ class TaskListFragment : Fragment() {
         builder.setTitle("delete ${task.title}")
         builder.setMessage("are you want to delete ${task.title} ?")
         builder.create().show()
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_task_list,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.new_task -> {
+                findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item) }
     }
 
 
