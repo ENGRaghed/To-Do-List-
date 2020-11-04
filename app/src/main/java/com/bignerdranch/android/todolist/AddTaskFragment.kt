@@ -13,10 +13,11 @@ import com.bignerdranch.android.todolist.data.Task
 import com.bignerdranch.android.todolist.data.TaskViewModel
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import kotlinx.android.synthetic.main.fragment_add_task.view.*
-import java.time.LocalDateTime
 import java.util.*
 
-class AddTaskFragment : Fragment() {
+private const val DIALOG_DATE = "DialogDate"
+private const val REQUEST_DATE = 0
+class AddTaskFragment : Fragment(),DatePickerFragment.Callbacks {
 
     private lateinit var taskViewModel : TaskViewModel
 
@@ -27,11 +28,27 @@ class AddTaskFragment : Fragment() {
         // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_add_task, container, false)
 
+        val task = Task()
         taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
         view.add_button.setOnClickListener{
             insertTaskToDatabase()
         }
+
+//        dateButton.setOnClickListener { DatePickerFragment().apply {
+//            show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE) }
+//        }
+
+//        view.task_due_date.setOnClickListener { DatePickerFragment().apply {
+//            show(this@AddTaskFragment.requireParentFragment(), DIALOG_DATE)
+//        }
+//        }
+
+//        view.task_due_date.setOnClickListener {  DatePickerFragment().apply {
+//            setTargetFragment(this@AddTaskFragment, REQUEST_DATE)
+//            show(this@AddTaskFragment.requireFragmentManager(), DIALOG_DATE)
+//        } }
+
 
         return view
     }
@@ -60,6 +77,11 @@ class AddTaskFragment : Fragment() {
 
     private fun inputCheck(title : String , desc : String) : Boolean {
         return !(TextUtils.isEmpty(title)||TextUtils.isEmpty(desc))
+    }
+
+    override fun onDateSelected(date: Date) {
+        Task().dueDate=date
+
     }
 
 }

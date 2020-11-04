@@ -12,6 +12,9 @@ interface TaskDao {
     @Update
     suspend fun updateTask(task: Task)
 
+    @Delete
+    suspend fun deleteTask(task : Task)
+
     @Query("SELECT * FROM task_table ORDER BY id ASC")
     fun readAllTask() : LiveData<List<Task>>
 }

@@ -48,8 +48,9 @@ class UpdateTaskFragment : Fragment() {
         val status = update_status.isChecked
 
         if (inputCheck(title,desc)){
-            val updatedTask = Task(id = args.task.id,title = title,status = status,
-                description = desc,creationDate = args.task.creationDate,
+            val updatedTask = Task(
+                id = args.task.id, title = title, status = status,
+                description = desc, creationDate = args.task.creationDate,
                 dueDate = args.task.dueDate)
             taskViewModel.updateTask(updatedTask)
 
