@@ -35,6 +35,12 @@ class TaskDetailsFragment : Fragment() {
 
 //        view.status_cb.isChecked = args.currentTask.status
 
+        if (args.currentTask.status){
+            view.status_cb.text = " Completed"
+        }else{
+            view.status_cb.text = " Not Completed"
+        }
+
 
 
         view.creation_date_tv.text = DateFormat.format(" EEEE ,MMM dd, yyyy.", args.currentTask.creationDate)

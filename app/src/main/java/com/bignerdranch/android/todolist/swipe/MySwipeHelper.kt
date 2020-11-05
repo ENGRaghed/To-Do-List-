@@ -1,4 +1,4 @@
-package com.bignerdranch.android.todolist
+package com.bignerdranch.android.todolist.swipe
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,7 +6,6 @@ import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.RectF
 import android.view.GestureDetector
-import android.view.InputQueue
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -74,7 +73,8 @@ abstract class MySwipeHelper(context: Context,private val recyclerView: Recycler
         this.gestureDetector = GestureDetector(context,gestureListener)
         this.recyclerView.setOnTouchListener(onTouchListener)
         this.buttonBuffer = HashMap()
-        this.removerQueue = IntLinkedList()
+        this.removerQueue =
+            IntLinkedList()
 
         attachSiwpe()
     }

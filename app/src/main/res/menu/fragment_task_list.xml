@@ -9,4 +9,20 @@
         android:title="@string/new_task"
         app:showAsAction="ifRoom|withText"/>
 
+    <item
+        android:id="@+id/all_task"
+        android:title="All" />
+    <item android:id="@+id/menu_item_store"
+        android:title="@string/due_date_item_menu"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/sort_creation_date"
+        android:title="Creation Date" />
+    <item
+        android:id="@+id/complete"
+        android:title="Complete" />
+    <item
+        android:id="@+id/not_complete"
+        android:title="Not Complete" />
+
 </menu>

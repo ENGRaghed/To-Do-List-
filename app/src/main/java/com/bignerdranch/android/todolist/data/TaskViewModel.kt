@@ -11,11 +11,21 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllTask : LiveData<List<Task>>
     private val repository : TaskRepository
+    val storByDate : LiveData<List<Task>>
+    val sortByCreationDate : LiveData<List<Task>>
+    val filterCompletedTask : LiveData<List<Task>>
+    val filterNotCompletedTask :LiveData<List<Task>>
+
 
     init {
         val taskDao = TaskDatabase.getDatabase(application).taskDao()
         repository = TaskRepository(taskDao)
         readAllTask = repository.readAllTask
+        storByDate = repository.sortByDate
+        sortByCreationDate = repository.sortByCreationDate
+        filterCompletedTask = repository.filterCompletedTask
+        filterNotCompletedTask = repository.filterNotCompletedTask
+
 
     }
 

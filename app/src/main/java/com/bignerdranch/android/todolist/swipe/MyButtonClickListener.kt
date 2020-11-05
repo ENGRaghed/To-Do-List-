@@ -1,4 +1,4 @@
-package com.bignerdranch.android.todolist
+package com.bignerdranch.android.todolist.swipe
 
 import androidx.recyclerview.widget.RecyclerView
 

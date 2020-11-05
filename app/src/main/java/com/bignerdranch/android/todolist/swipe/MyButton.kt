@@ -1,4 +1,4 @@
-package com.bignerdranch.android.todolist
+package com.bignerdranch.android.todolist.swipe
 
 import android.content.Context
 import android.content.res.Resources
@@ -6,14 +6,15 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.todolist.swipe.MyButtonClickListener
 
 class MyButton( private val context: Context,
                 private val text : String,
                 private val textSize : Int,
                 private val imageResId :Int,
                 private val color : Int,
-                private val listener :MyButtonClickListener) {
+                private val listener : MyButtonClickListener
+) {
     private var pos : Int =0
     private var clickRegion:RectF?=null
     private val resources : Resources
